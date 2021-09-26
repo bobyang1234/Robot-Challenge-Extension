@@ -29,7 +29,6 @@ namespace Robot_Challenge
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btn_readfromfile = new System.Windows.Forms.Button();
             this.btn_readinputs = new System.Windows.Forms.Button();
             this.txtbox_filelocation = new System.Windows.Forms.TextBox();
@@ -40,8 +39,7 @@ namespace Robot_Challenge
             this.lbl_inputcommands = new System.Windows.Forms.Label();
             this.txtbox_invalidinputcommands = new System.Windows.Forms.TextBox();
             this.lbl_invalidinputcommands = new System.Windows.Forms.Label();
-            this.lbl_validcommand = new System.Windows.Forms.Label();
-            this.txtbox_validcommand = new System.Windows.Forms.TextBox();
+            this.btn_validcommands = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_readfromfile
@@ -87,7 +85,7 @@ namespace Robot_Challenge
             this.txtbox_output.Multiline = true;
             this.txtbox_output.Name = "txtbox_output";
             this.txtbox_output.ReadOnly = true;
-            this.txtbox_output.Size = new System.Drawing.Size(169, 392);
+            this.txtbox_output.Size = new System.Drawing.Size(364, 392);
             this.txtbox_output.TabIndex = 11;
             // 
             // txtbox_input
@@ -137,33 +135,22 @@ namespace Robot_Challenge
             this.lbl_invalidinputcommands.TabIndex = 17;
             this.lbl_invalidinputcommands.Text = "Invalid Input Commands";
             // 
-            // lbl_validcommand
+            // btn_validcommands
             // 
-            this.lbl_validcommand.AutoSize = true;
-            this.lbl_validcommand.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_validcommand.Location = new System.Drawing.Point(796, 23);
-            this.lbl_validcommand.Name = "lbl_validcommand";
-            this.lbl_validcommand.Size = new System.Drawing.Size(182, 18);
-            this.lbl_validcommand.TabIndex = 19;
-            this.lbl_validcommand.Text = "What is a valid command?";
-            // 
-            // txtbox_validcommand
-            // 
-            this.txtbox_validcommand.Location = new System.Drawing.Point(799, 55);
-            this.txtbox_validcommand.Multiline = true;
-            this.txtbox_validcommand.Name = "txtbox_validcommand";
-            this.txtbox_validcommand.ReadOnly = true;
-            this.txtbox_validcommand.Size = new System.Drawing.Size(179, 413);
-            this.txtbox_validcommand.TabIndex = 20;
-            this.txtbox_validcommand.Text = resources.GetString("txtbox_validcommand.Text");
+            this.btn_validcommands.Location = new System.Drawing.Point(36, 552);
+            this.btn_validcommands.Name = "btn_validcommands";
+            this.btn_validcommands.Size = new System.Drawing.Size(167, 35);
+            this.btn_validcommands.TabIndex = 21;
+            this.btn_validcommands.Text = "What is a valid command?";
+            this.btn_validcommands.UseVisualStyleBackColor = true;
+            this.btn_validcommands.Click += new System.EventHandler(this.btn_validcommands_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1004, 616);
-            this.Controls.Add(this.txtbox_validcommand);
-            this.Controls.Add(this.lbl_validcommand);
+            this.Controls.Add(this.btn_validcommands);
             this.Controls.Add(this.lbl_invalidinputcommands);
             this.Controls.Add(this.txtbox_invalidinputcommands);
             this.Controls.Add(this.btn_readfromfile);
@@ -193,8 +180,7 @@ namespace Robot_Challenge
         private System.Windows.Forms.Label lbl_inputcommands;
         private System.Windows.Forms.TextBox txtbox_invalidinputcommands;
         private System.Windows.Forms.Label lbl_invalidinputcommands;
-        private System.Windows.Forms.Label lbl_validcommand;
-        private System.Windows.Forms.TextBox txtbox_validcommand;
+        private System.Windows.Forms.Button btn_validcommands;
     }
 }
 

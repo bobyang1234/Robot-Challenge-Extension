@@ -115,23 +115,23 @@ namespace Robot_Challenge
         {
             commands.Clear();
             txtbox_output.Clear();
-            txtbox_invalidinputcommands.Clear(); 
+            txtbox_invalidinputcommands.Clear();
             for (int i = 0; i < txtbox_input.Lines.Length; i++)
             {
-                if(active_robot.CheckValidInput(txtbox_input.Lines[i]))
+                if (active_robot.CheckValidInput(txtbox_input.Lines[i]))
                 {
                     commands.Add(txtbox_input.Lines[i]);
-                }                     
+                }
                 else
                 {
-                    if(string.IsNullOrWhiteSpace(txtbox_input.Lines[i]))
+                    if (string.IsNullOrWhiteSpace(txtbox_input.Lines[i]))
                     {
                         txtbox_invalidinputcommands.AppendText($"You entered whitespace or no characters at line {i}, this is invalid" + Environment.NewLine);
                     }
                     else
                     {
                         txtbox_invalidinputcommands.AppendText($"{txtbox_input.Lines[i]} at line {i} is invalid" + Environment.NewLine);
-                    }                    
+                    }
                 }
             }
             foreach (string value in commands)
@@ -181,6 +181,12 @@ namespace Robot_Challenge
             {
                 txtbox_filelocation.Text = "Please enter a valid file location path";
             }
+        }
+
+        private void btn_validcommands_Click(object sender, EventArgs e)
+        {
+            HelpForm helpform = new HelpForm();
+            helpform.ShowDialog();
         }
     }
 }

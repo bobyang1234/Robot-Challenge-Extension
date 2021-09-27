@@ -40,6 +40,7 @@ namespace Robot_Challenge
             this.txtbox_invalidinputcommands = new System.Windows.Forms.TextBox();
             this.lbl_invalidinputcommands = new System.Windows.Forms.Label();
             this.btn_validcommands = new System.Windows.Forms.Button();
+            this.btn_resetall = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_readfromfile
@@ -145,11 +146,22 @@ namespace Robot_Challenge
             this.btn_validcommands.UseVisualStyleBackColor = true;
             this.btn_validcommands.Click += new System.EventHandler(this.btn_validcommands_Click);
             // 
+            // btn_resetall
+            // 
+            this.btn_resetall.Location = new System.Drawing.Point(234, 555);
+            this.btn_resetall.Name = "btn_resetall";
+            this.btn_resetall.Size = new System.Drawing.Size(183, 31);
+            this.btn_resetall.TabIndex = 22;
+            this.btn_resetall.Text = "Reset All Robots";
+            this.btn_resetall.UseVisualStyleBackColor = true;
+            this.btn_resetall.Click += new System.EventHandler(this.btn_resetall_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1004, 616);
+            this.Controls.Add(this.btn_resetall);
             this.Controls.Add(this.btn_validcommands);
             this.Controls.Add(this.lbl_invalidinputcommands);
             this.Controls.Add(this.txtbox_invalidinputcommands);
@@ -181,6 +193,7 @@ namespace Robot_Challenge
         private System.Windows.Forms.TextBox txtbox_invalidinputcommands;
         private System.Windows.Forms.Label lbl_invalidinputcommands;
         private System.Windows.Forms.Button btn_validcommands;
+        private System.Windows.Forms.Button btn_resetall;
     }
 }
 

@@ -13,7 +13,6 @@ namespace Robot_Challenge
 {    
     public partial class Form1 : Form
     {
-        public List<string> commands;
         public List<string> filelines;
         public List<Robot> list_of_active_robots;
         public Robot active_robot;
@@ -23,8 +22,7 @@ namespace Robot_Challenge
         
         public Form1()
         {
-            InitializeComponent();
-            commands = new List<string>();            
+            InitializeComponent();                       
             first_command = true;
             file = new ReadFile();
             filelines = new List<string>();
@@ -34,13 +32,14 @@ namespace Robot_Challenge
         }
 
         //This method selects which robot command to call from the robot class based off the string input
-        public void SelectCommand(string input)
+        public void SelectCommand(string input, int line_num)
         {
             Regex rgx = new Regex("^((MOVE)|(REPORT)|(LEFT)|(RIGHT)|(ROBOT<[1-9]\\d*>))$", RegexOptions.IgnoreCase);
             Regex place = new Regex("^PLACE [0-5],[0-5],(north|south|east|west)$", RegexOptions.IgnoreCase);
             //first call can't be move, report, left or right
             if (rgx.IsMatch(input) && first_command)
-            {                
+            {
+                txtbox_invalidinputcommands.AppendText($"{input} at {line_num} is not a valid command, first command must be a valid place" + Environment.NewLine);
                 return;
             }
             //first call must be a place
@@ -65,7 +64,7 @@ namespace Robot_Challenge
                     }
                     else
                     {
-                        txtbox_invalidinputcommands.AppendText($"{input} is not a valid command" + Environment.NewLine);
+                        txtbox_invalidinputcommands.AppendText($"{input} at {line_num} is not a valid command" + Environment.NewLine);
                     }                    
                 }
                 else
@@ -112,15 +111,14 @@ namespace Robot_Challenge
 
         //Read input textbox
         private void btn_readinputs_Click(object sender, EventArgs e)
-        {
-            commands.Clear();
+        {            
             txtbox_output.Clear();
             txtbox_invalidinputcommands.Clear();
             for (int i = 0; i < txtbox_input.Lines.Length; i++)
             {
                 if (active_robot.CheckValidInput(txtbox_input.Lines[i]))
                 {
-                    commands.Add(txtbox_input.Lines[i]);
+                    SelectCommand(txtbox_input.Lines[i], i);
                 }
                 else
                 {
@@ -133,11 +131,7 @@ namespace Robot_Challenge
                         txtbox_invalidinputcommands.AppendText($"{txtbox_input.Lines[i]} at line {i} is invalid" + Environment.NewLine);
                     }
                 }
-            }
-            foreach (string value in commands)
-            {
-                SelectCommand(value);
-            }
+            }            
         }
 
         //Read file
@@ -146,9 +140,8 @@ namespace Robot_Challenge
             filelines.Clear();
             txtbox_input.Clear();
             txtbox_output.Clear();
-            txtbox_invalidinputcommands.Clear();            
-            first_command = true;
-            int i = 0;
+            txtbox_invalidinputcommands.Clear();  
+            int line_number = 0;
             try
             {
                 filelines = file.ReadTextFile(txtbox_filelocation.Text);
@@ -157,20 +150,20 @@ namespace Robot_Challenge
                     if (active_robot.CheckValidInput(value))
                     {
                         txtbox_input.AppendText(value + Environment.NewLine);
-                        SelectCommand(value);
+                        SelectCommand(value, line_number);
                     }
                     else
                     {
                         if (string.IsNullOrWhiteSpace(value))
                         {
-                            txtbox_invalidinputcommands.AppendText($"You entered whitespace or no characters at line {i}, this is invalid" + Environment.NewLine);
+                            txtbox_invalidinputcommands.AppendText($"You entered whitespace or no characters at line {line_number}, this is invalid" + Environment.NewLine);
                         }
                         else
                         {
-                            txtbox_invalidinputcommands.AppendText($"{value} at line {i} is invalid" + Environment.NewLine);
+                            txtbox_invalidinputcommands.AppendText($"{value} at line {line_number} is invalid" + Environment.NewLine);
                         }
                     }
-                    i++;
+                    line_number++;
                 }
             }
             catch (System.IO.FileNotFoundException)
@@ -187,6 +180,19 @@ namespace Robot_Challenge
         {
             HelpForm helpform = new HelpForm();
             helpform.ShowDialog();
+        }
+
+        private void btn_resetall_Click(object sender, EventArgs e)
+        {
+            txtbox_filelocation.Clear();
+            txtbox_input.Clear();
+            txtbox_invalidinputcommands.Clear();
+            txtbox_output.Clear();
+            list_of_active_robots.Clear();
+            current_active_robot = 1;
+            active_robot = new Robot(1);
+            list_of_active_robots.Add(active_robot);
+            first_command = true;
         }
     }
 }
